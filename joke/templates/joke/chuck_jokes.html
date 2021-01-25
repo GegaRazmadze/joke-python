@@ -1,0 +1,25 @@
+{% extends "joke/layout.html" %}
+
+{% block body %}
+    {% if not user.is_authenticated %}  
+    <div class="main_announcement">
+        <h1>To Save Favorite Jokes Log In :))</h1>
+    </div>
+    {% endif %}
+    <div class="rendom_display_container">
+        <form action="{% url 'chuck_jokes' %}" id="Rendom_chuck_form" method="get">
+            <button id="Rendom_chuck_button" type="submit" class="rendom_button btn  btn--animated">Rendom Chuck Facts</button>
+        </form>
+        <div class="rendom_display_field">
+            <h2 id="rendom_chuck_joke"></h2>
+        </div>
+        {% if user.is_authenticated %}
+        <form id="add_joke_to_favorites" class="add_joke_to_favorites_class" action="{% url 'add_delete_favorites' %}" method="post">
+            <input id="joke_id_input" type="hidden" name="joke_id" value="" data-jokesId="{{jokes_id}}">
+            <input id="joke_body_input" type="hidden" name="joke_body" value="">
+            <input id="joke_type_input" type="hidden" name="joke_type" value="Chuck">
+            <input id="joke_add_delete_button" class="joke_add_delete_button_class btn  btn--animated" type="submit" value="Add To Favorites">
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}

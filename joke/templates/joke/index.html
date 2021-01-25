@@ -1,0 +1,24 @@
+{% extends "joke/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if not user.is_authenticated %}  
+    <div class="main_announcement">
+        <h1>To Save Favorite Jokes Log In :))</h1>
+    </div>
+    {% endif %}
+    <div class="navigation_buttons_main_page">
+    <div class="main_page_jokes_img_container">
+    <a class="main_page_imge_a" href="{% url 'chuck_jokes' %}">
+        <img src='{% static "joke/img/chuck-norris.jpg" %}' alt="chuck-norris" class="main_page_img">
+        <span class="main_page_img_title">Almighty Chuck Norris</span>
+    </a>
+    </div>
+    <div class="main_page_jokes_img_container">
+        <a class="main_page_imge_a" href="{% url 'other_jokes' %}">
+            <img src='{% static "joke/img/joke.jpg" %}' alt="other_jokes_img" class="main_page_img">
+            <span class="main_page_img_title">Other Jokes</span>
+        </a>
+    </div>
+    </div>  
+{% endblock %}

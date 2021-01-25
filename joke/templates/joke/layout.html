@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Joke{% endblock %}</title>
+        <link rel="shortcut icon" type="image/x-icon" href='{% static "joke/img/logo.png" %}'>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+  
+        <link href="{% static 'joke/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+    <!-- Main Container / Background Container -->
+    <div class="container">
+        <header class="header">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src='{% static "joke/img/logo.png" %}' alt="Joke logo" class="logo">
+            </a>
+            <nav class="user-nav">
+                {% if user.is_authenticated %}
+                <div class="user-nav__icon-box user-nav__username">
+                        <a class="nav-link" href="{% url 'index' %}"><span>{{ user.username }}</span></a>
+                </div>
+                <div class="user-nav__icon-box">
+                        <a class="nav-link" href="{% url 'favorite_jokes' %}"><span>Favorites</span></a>
+                </div>
+                <div class="user-nav__icon-box">
+                        <a class="nav-link" href="{% url 'logout' %}"><span>Log Out</span></a>
+                </div>
+                {% else %}
+                <div class="user-nav__icon-box">
+                        <a class="nav-link" href="{% url 'login' %}"><span>Log In</span></a>
+                </div>
+                <div class="user-nav__icon-box">
+                        <a class="nav-link" href="{% url 'register' %}"><span>Register</span></a>
+                </div>
+                {% endif %}
+            </nav>
+        </header>
+
+        <div class="content">
+            <nav class="sidebar">
+                <ul class="side-nav">
+                    <li class="side-nav__item side-nav__item--active">
+                        <a class="side-nav__link" href="{% url 'index' %}">
+                            <span> HOME </span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a class="side-nav__link" href="{% url 'chuck_jokes' %}">
+                           <span> Almighty Chuck Norris </span>
+                        </a>
+                    </li>
+                    <li class="side-nav__item">
+                        <a class="side-nav__link" href="{% url 'other_jokes' %}">
+                            <span> Other Jokes </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="legal">
+                    &copy 2020 Made By Gega For CS50’s Web Programming with Python and JavaScript
+                </div>
+            </nav>
+            <div class="detail">
+                {% block body %}
+                {% endblock %}      
+            </div>
+        </div>
+    </div>
+    </body>
+    <script src="{% static 'joke/index.js' %}"></script>
+</html>
