@@ -46,6 +46,15 @@ Inside the main folder 'Joke', we have main folders and files: static, templates
 
 - `views.py` - views.py is pretty big file in our project. it contains all view functions for Project and Task: for authentication, like login and sign up, for
 main page (index), for chuck jokes (chuck_jokes), for other jokes (other_jokes), for functionality to add jokes in favorites (add_delete_favorites), for favourite page to see all favorite jokes(favorite_jokes).
+  - `index` function renders main page - index.html
+  - `login_view` function - if request method is get renders login page - login.html. if req. method id post it takes username and password, and authenticate. if user exists its log in end renders main page, if not gives to user Alert message -("message": "Invalid username and/or password.").
+  - `logout_view` - log USer Out and renders main page.
+  - `register` function - if request method is get renders register page -register.html. If req. method id post it takes username, email, password, confirmation - check it and if it is valid it creates User ("with - user.save()") object if not gives Alert Message -("message": "Username already taken." or  "message": "Passwords must match.").
+  - `chuck_jokes` function - It renders chuck jokes page - chuck_jokes.html. If user is loged in it takes all jokes_id from favoriteJoke and pass it to html file and then to js file for checking rendom joke if it is already added in favorites or not.
+  - `other_jokes` function - It is very similar to "chuck_jokes".  It renders other jokes page - other_jokes.html. If user is loged in it takes all jokes_id from favoriteJoke and pass it to html file and then to js file for checking rendom joke if it is already added in favorites or not.
+  - `add_delete_favorites` function - this function if for button to add or if its already added remove joke from favorite table. To access this path user need to be loged in and for it I use @login_required - inherited from "django.contrib.auth.decorators" and I use csrf_exempt to disable csrf inherited from "django.views.decorators.csrf". if request method is get renders main page -index.html. If req. method is POST it takes joke_id, joke_type and body, chech if it allready exist or not in table. if not it addes init f_joke.save(), if joke exists id deletes it "FavoriteJoke.objects.filter(joke_id=joke_id, user_id_id=user_id, joke_type=joke_type).delete()" and then returns JsonRespose with data in it wich contains: joke_id, user_id, joke_type, body.
+  - `favorite_jokes` function - To access this path user need to be loged in. - It gives all info witch need to Display Favodite page, it also contains Paginator inherited from "django.core.paginator" witch displayes 10 joke pere page. - first function takes loged In users user.id and convers to -int()- integer  then if request is post it itakes type of Joke from "TypeChoiceForm" witch gives selected type of joke by use, and then filters table by joke_type and user_id, sorted it bu date and gives all necessary info.  and then displayes favorite jokes page - favorite_jokes.html.
+  
 
 - `Templates` - Holds all html files with Django's template language in it.
 
