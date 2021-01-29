@@ -36,12 +36,15 @@ This project is distinct from all previous projects so far. Why?
 Inside the main folder 'Joke', we have main folders and files: static, templates, forms.py, models.py, urls.py, views.py...
 
 - `models.py` - there are User's' (AbstractUser) for registered Users info and FavoriteJoke model for saved favorite jokes (user can't do this if user is not loged in).
-
+  - class `User(AbstractUser)` is model that represents each user of the application. It inherits from AbstractUser, that is why it has fields for a username, email, password, etc.
+  - class `FavoriteJoke(models.Model)` is model that represents Favorite Jokes witch user select: joke_id, user_id, joke_type, body, date - time when joke was selected it helps us to sort jokes correctly. It inherits from Model. In FavoriteJoke(models.Model) there is Meta class 'unique_together' witch controls that row with this ['user_id', 'joke_id'] to be unique and does not repeat in DB. joke_type has "choices" (Model field reference) to select Chuck and OtherJoke which helps us to select what type of joke user want to display.   
+  
 - `urls.py` - Contains all url paths for Project and Task control: for main page, for authentication, like login and sign up, for chuck and for other jokes, for favorite page etc.
 
 - `forms.py` - form for selector by which  user can select which  type of joke user want to see.
+  - class `TypeChoiceForm(forms.Form)` - selector form witch has 3 fields: All, Chuck, OtherJoke.
 
-- `views.py` - views.py is pretty big file in out procject. it contains all view functions for Project and Task: for authentication, like login and sign up, for
+- `views.py` - views.py is pretty big file in our project. it contains all view functions for Project and Task: for authentication, like login and sign up, for
 main page (index), for chuck jokes (chuck_jokes), for other jokes (other_jokes), for functionality to add jokes in favorites (add_delete_favorites), for favourite page to see all favorite jokes(favorite_jokes).
 
 - `Templates` - Holds all html files with Django's template language in it.
