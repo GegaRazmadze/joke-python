@@ -57,11 +57,27 @@ main page (index), for chuck jokes (chuck_jokes), for other jokes (other_jokes),
   
 
 - `Templates` - Holds all html files with Django's template language in it.
+  - `layout.html` - Is main html file witch contains: main container, header (user navigation), navigation bar and script tag for linking JS file (index.js).
+  - `index.html` - contains main page images and buttons to navigate.
+  - `login.html` - contains forms for username and password, Login button and button for navigat to Register.
+  - `register.html` - contains forms for username , email, password and concfirm password. register button and button for navigate to Log in.
+  - `chuck_jokes.html` - contains form for rendom button, container for joke and form for saving or removig joke from Favorites.
+  - `other)joke.html` - contains form for rendom button, container for joke and form for saving or removig joke from Favorites.
+  - `favourite_jokes.html` - form for joke selector and button, favoritejokes main container joke container in init - rendering with "for" - loop, Paginator To divide pages.
+  
 
 - `static` - Holds all static files.
-  - `img` - Holds all static images and icons.
-  - `styles.css` - Holds all styles and animations for pages, for the layouts flex-box. with color i use css variables (--color-green-light-1 etc.), there are '@media only screen' - s for site to be Completely Mobile responsive.
+  - `img` - Holds all static images and icons: 2 .jpg and 1 .png files.
+  - `styles.css` - Holds all styles and animations for pages, for the layouts flex-box. with color i use css variables (--color-green-light-1 etc.), there are '@media only screen' - s for site to be Completely Mobile responsive. To select the elements I used: Simple selectors, Combinator selectors, Pseudo-class selectors, Pseudo-elements selectors, Attribute slectors.
   - `index.js` - Contains functions for Site to be flexible and more user friendly. for favorites page there is function 'setCssForFavoritePage' to display different chuckNorris and OtherJokes CSS (chuck_jokes_css_class, other_jokes_css_class ), there is functions for little animation when deleting joke from a page (to be more dynamic and nice). (clicking on X - which  is from HTML Unicode UTF-8). there are functions to  Query Rendom Chuck Joke and Rendom Other Jokes Joke from API-es ((API-Link : https://rapidapi.com/matchilling/api/chuck-norris?endpoint=57cfbe2de4b0504b4a8199b5 - Chuck,) (API-Link : https://rapidapi.com/LemmoTresto/api/joke3/endpoints - Other Joke.)).
+    - `document.addEventListener('DOMContentLoaded', function() {])` - When the page is rendered to run the following functions, in it there is if check function for cheching if document querySelector exist and than if starts function.
+    - `queryRendomChuckJoke` function - fetches Data from API and pass it to "rendomChuckJoke" function. if something goes wrong it catchs Error message.
+    - `queryRendomOtherJoke` function - fetches Data from API and pass it to "rendomOtherJokesJoke" function. if something goes wrong it catchs Error message.
+    - `rendomChuckJoke` - it takes Data from queryRendomChuckJoke and displayes. It checks if joke has already added or not in favorites joke and based on this displayes 'Remove From Favorites' or 'Add To Favorites' button.
+    - `rendomOtherJokesJoke` - it takes Data from queryRendomOtherJoke and displayes. It checks if joke has already added or not in favorites joke and based on this displayes 'Remove From Favorites' or 'Add To Favorites' button.
+    - `sendAddDeleteFavoritesRequest` - (For main page) - it takes infro from joke and then send post request to server for saving or deleting joke from Users Table . It checks if joke has already added or not in favorites joke and based on this displayes 'Remove From Favorites' or 'Add To Favorites' button.
+    - `deleteJokeFromFavoritesPage` - (For Favorites page) - it takes infro from joke and then send post request to server for deleting joke from Users Table.
+    - `setCssForFavoritePage` - Takes Jokes type and based on this Sets Relevant CSS-Class.
 
 
 
